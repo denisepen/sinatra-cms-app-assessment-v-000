@@ -35,6 +35,11 @@ class ApplicationController < Sinatra::Base
  get '/workouts/new' do
    erb :'/workouts/new'
  end
+
+ get '/users/workouts' do
+   @user = User.find(session[:user_id])
+   erb :"/workouts/show"
+ end
   post '/signup' do
 
       if params[:username].empty? || params[:email].empty? || params[:password].empty?
@@ -66,11 +71,22 @@ class ApplicationController < Sinatra::Base
 end
 
 post '/workouts/show' do
-  raise params.inspect
+  #  raise params.inspect
   @workout = Workout.new(type: params[:type], duration: params[:duration], comment: params[:comment])
+    @workout.save
   erb :"/workouts/show"
 end
 
+delete '/workouts/:id/delete' do
+
+    @workout =Workout.find_by_id(params[:id])
+   if  @workout.user_id == session[:user_id] && logged_in?
+     @workout.delete
+    redirect '/users/workouts'
+  else
+   redirect '/users/workouts'
+end
+end
 
 
   helpers do
