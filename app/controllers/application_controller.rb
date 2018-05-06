@@ -32,6 +32,9 @@ class ApplicationController < Sinatra::Base
   redirect '/login'
  end
 
+ get '/workouts/new' do
+   erb :'/workouts/new'
+ end
   post '/signup' do
 
       if params[:username].empty? || params[:email].empty? || params[:password].empty?
@@ -62,6 +65,10 @@ class ApplicationController < Sinatra::Base
     end
 end
 
+post '/workouts/show' do
+  raise params.inspect
+  erb :"/workouts/show"
+end
 
 
 
