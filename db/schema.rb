@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2018_05_04_165209) do
   end
 
   create_table "workouts", force: :cascade do |t|
-    t.string "type"
+    t.string "workout"
     t.string "comment"
     t.integer "duration"
     t.integer "mileage"

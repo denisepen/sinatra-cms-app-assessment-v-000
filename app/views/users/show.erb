@@ -1,6 +1,6 @@
 <h1><%= @user.username.capitalize %>'s  Workouts</h1>
 
 <% @user.workouts.all.each do |wkt| %>
-<a href="/workouts/show/<%= wkt.id %>">Workout: <%= wkt.type %> </a>
-  Duration: <%= wkt.duration %> minutes
+<a href="/workouts/<%= wkt.id %>">Workout: <%= wkt.workout %>   Duration: <%= wkt.duration %> minutes</a> <br>
+
   <% end %>

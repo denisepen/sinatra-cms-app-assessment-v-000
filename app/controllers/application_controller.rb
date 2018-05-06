@@ -33,6 +33,7 @@ class ApplicationController < Sinatra::Base
  end
 
  get '/show' do
+   @user = User.find(session[:user_id])
    erb :"/users/show"
  end
 
@@ -61,6 +62,16 @@ end
  get '/workouts/new' do
    erb :'/workouts/new'
  end
+  get '/workouts/workouts' do
+    # @user = User.find(session[:user_id])
+    erb :"/workouts/index"
+  end
+
+ get '/workouts/show' do
+   @user = User.find(session[:user_id])
+   @workout = Workout.find(params[:id])
+   erb :"workouts/show"
+ end
 
  get '/workouts/:id' do
 
@@ -82,13 +93,13 @@ end
 
  patch '/workouts/:id' do
  #route to edit a single workout
-  raise params.inspect
+  # raise params.inspect
   if logged_in?
    @workout=Workout.find(params[:id])
-     if !params[:type].empty?
-       @workout.update(type: params[:type])
+     if !params[:workout].empty?
+       @workout.update(workout: params[:workout], duration: params[:duration], comment: params[:comment], mileage: params[:mileage])
 
-      session[:type] = params[:type]
+      session[:workout] = params[:workout]
       @user = User.find(session[:user_id])
       @user.id = @workout.user_id
       @workout.save
@@ -136,9 +147,9 @@ end
 
 post '/workouts/show' do
   #new workout created & displayed with this route
-  #  raise params.inspect
+   raise params.inspect
   @user = User.find(session[:user_id])
-  @workout = Workout.new(type: params[:type], duration: params[:duration], comment: params[:comment])
+  @workout = Workout.new(workout: params[:workout], duration: params[:duration], comment: params[:comment], mileage: params[:mileage])
     @workout.save
 
     @user.workouts << @workout

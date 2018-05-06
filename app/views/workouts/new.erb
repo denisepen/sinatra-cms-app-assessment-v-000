@@ -2,18 +2,17 @@
 
 <form class="" action="/workouts/show" method="post">
   <label for="wkt">Choose The Workout Type From The Dropdown Menu: </label>
-<input list="wkt" name="type">
-  <datalist id="wkt" name="type">
-    <option value="Run" name="type">Run</option>
-    <option value="Bike" name="type">Bike</option>
-    <option value="Walk" name="type">Walk</option>
-    <option value="Yoga" name="type">Yoga</option>
-    <option value="Cardio" name="type">Cardio</option>
-    <option value="Weight Training" name="type">Weight Training</option> <br>
-  </datalist>
+  <select name="workout">
+    <option value="Run">Run</option>
+    <option value="Bike">Bike</option>
+    <option value="Walk">Walk</option>
+    <option value="Yoga">Yoga</option>
+    <option value="Cardio">Cardio</option>
+    <option value="Weight Training">Weight Training</option> <br>
+</select>
 
   <label for="wkt">Or create a new type of workout: </label>
-  <input id="wkt" type="text" name="type" value=""><br> <br>
+  <input id="wkt" type="text" name="workout" value=""><br> <br>
 
   <label for="dur">Workout Duration (minutes)</label>
   <input id="dur" type="text" name="duration" value=""><br> <br>
