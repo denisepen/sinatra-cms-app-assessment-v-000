@@ -26,6 +26,11 @@ class ApplicationController < Sinatra::Base
     "Landing Page"
   end
 
+  get '/logout' do
+    session.clear
+  redirect '/login'
+ end
+
   post '/signup' do
 
       if params[:username].empty? || params[:email].empty? || params[:password].empty?
@@ -42,6 +47,19 @@ class ApplicationController < Sinatra::Base
        end
       end
   end
+
+  post "/login" do
+     user = User.find_by(username: params[:username])
+
+    if user && user.authenticate(params[:password])
+          session[:user_id] = user.id
+          session[:email] = user.email
+          session[:username] = user.username
+        redirect "/landing"
+    else
+        redirect "/login"
+    end
+end
 
 
 
