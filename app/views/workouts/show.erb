@@ -4,5 +4,12 @@
 <h2>Duration:  <%= @workout.duration %> minutes</h2> <br>
 <h2>Comments:  <%= @workout.comment %>  </h2>
 
-<a href="#">Edit</a>
-<a href="#">Delete</a>
+
+<form class="" action="/workouts/<%= @workout.id %>/edit" method="get">
+  <input type="submit" name="Edit Workout" value="">
+</form>
+
+<form class="" action="/workouts/<%=@workout.id %>/delete" method="post">
+  <input type="hidden" id= "hidden" name="_method" value="delete">
+  <input type="submit" name="" value="Delete Workout">
+</form>
