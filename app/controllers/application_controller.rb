@@ -26,6 +26,8 @@ post '/signup' do
   "Hello"
 end
 
+testing testing
+
 
   helpers do
   		def logged_in?
