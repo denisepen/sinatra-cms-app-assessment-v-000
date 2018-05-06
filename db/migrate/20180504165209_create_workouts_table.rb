@@ -4,6 +4,7 @@ class CreateWorkoutsTable < ActiveRecord::Migration[5.2]
       t.string    :type
       t.string    :comment
       t.integer   :duration
+      t.integer   :mileage
       t.integer   :user_id
     end
   end

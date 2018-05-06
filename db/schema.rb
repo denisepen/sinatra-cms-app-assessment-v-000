@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2018_05_04_165209) do
     t.string "type"
     t.string "comment"
     t.integer "duration"
+    t.integer "mileage"
     t.integer "user_id"
   end
 
