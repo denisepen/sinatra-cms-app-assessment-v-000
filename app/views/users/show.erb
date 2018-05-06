@@ -3,4 +3,6 @@
 <% @user.workouts.all.each do |wkt| %>
 <a href="/workouts/<%= wkt.id %>">Workout: <%= wkt.workout %>   Duration: <%= wkt.duration %> minutes</a> <br>
 
-  <% end %>
+  <% end %> <br>
+
+  <a href="/logout">Log Out</a>
