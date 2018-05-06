@@ -9,6 +9,7 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "secret"
   end
 
+
   get '/' do
     erb :homepage
   end
@@ -21,6 +22,9 @@ class ApplicationController < Sinatra::Base
     erb :'/users/login'
   end
 
+post '/signup' do
+  "Hello"
+end
 
 
   helpers do
