@@ -57,6 +57,21 @@ class ApplicationController < Sinatra::Base
       end
   end
 
+  get '/workouts/:id/edit' do
+  if logged_in?
+    @user = User.find(session[:user_id])
+    @workout = Workout.find(params[:id])
+    if @user.id == @workout.user_id
+
+    erb :"/workouts/edit"
+  else
+    redirect '/workouts'
+  end
+else
+  redirect '/login'
+end
+end
+
   post "/login" do
      user = User.find_by(username: params[:username])
 
