@@ -29,17 +29,73 @@ class ApplicationController < Sinatra::Base
 
   get '/logout' do
     session.clear
-  redirect '/login'
+    redirect '/login'
  end
+
+ get '/workouts/:id/edit' do
+  #  binding.pry
+ if logged_in?
+   @user = User.find(session[:user_id])
+   @workout = Workout.find(params[:id])
+   @user.save
+   if @user.id == @workout.user_id
+
+   erb :"/workouts/edit"
+ else
+   redirect '/workouts'
+ end
+else
+ redirect '/login'
+end
+end
 
  get '/workouts/new' do
    erb :'/workouts/new'
  end
 
+ get '/workouts/:id' do
+
+   @workout = Workout.find(params[:id])
+
+  if session[:user_id] == @workout.user_id
+
+    @user = User.find(session[:user_id])
+  erb :"workouts/show"
+elsif logged_in? && session[:user_id] != @workout.user_id
+  @user = User.find(session[:user_id])
+  erb :"workouts/show"
+else
+
+  redirect '/login'
+end
+end
+
  get '/users/workouts' do
    @user = User.find(session[:user_id])
    erb :"/workouts/show"
  end
+
+ patch '/workouts/:id' do
+  # binding.pry
+  if logged_in?
+   @workout=Workout.find(params[:id])
+     if !params[:type].empty?
+       @workout.update(type: params[:type])
+
+      session[:type] = params[:type]
+      @user = User.find(session[:user_id])
+      @user.id = @workout.user_id
+      @workout.save
+      redirect "/workouts/#{@workout.id}"
+    else
+      redirect "/workouts/#{@workout.id}/edit"
+    end
+
+  end
+end
+
+
+
   post '/signup' do
 
       if params[:username].empty? || params[:email].empty? || params[:password].empty?
@@ -57,20 +113,7 @@ class ApplicationController < Sinatra::Base
       end
   end
 
-  get '/workouts/:id/edit' do
-  if logged_in?
-    @user = User.find(session[:user_id])
-    @workout = Workout.find(params[:id])
-    if @user.id == @workout.user_id
 
-    erb :"/workouts/edit"
-  else
-    redirect '/workouts'
-  end
-else
-  redirect '/login'
-end
-end
 
   post "/login" do
      user = User.find_by(username: params[:username])
@@ -87,8 +130,11 @@ end
 
 post '/workouts/show' do
   #  raise params.inspect
+  @user = User.find(session[:user_id])
   @workout = Workout.new(type: params[:type], duration: params[:duration], comment: params[:comment])
     @workout.save
+
+    @user.workouts << @workout
   erb :"/workouts/show"
 end
 

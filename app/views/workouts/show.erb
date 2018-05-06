@@ -6,10 +6,10 @@
 
 
 <form class="" action="/workouts/<%= @workout.id %>/edit" method="get">
-  <input type="submit" name="Edit Workout" value="">
+  <input type="submit" name="" value="Edit Workout">
 </form>
 
-<form class="" action="/workouts/<%=@workout.id %>/delete" method="post">
+<form class="" action="/workouts/<%= @workout.id %>/delete" method="post">
   <input type="hidden" id= "hidden" name="_method" value="delete">
   <input type="submit" name="" value="Delete Workout">
 </form>
