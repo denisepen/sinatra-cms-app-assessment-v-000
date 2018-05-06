@@ -1,16 +1,16 @@
 <h1>Edit Your Workout </h1>
 
-<form class="" action="/workouts/show" method="post">
+<form class="" action="/workouts/<%= @workout.id %>" method="post">
 <input type="hidden" id="hidden" name="_method" value="patch">
 
   <label for="wkt">Workout Type: </label>
-<input type="text" name="type" value="<%= @workout.type">
+<input type="text" name="type" value="<%= @workout.type %>">
 
   <label for="dur">Workout Duration (minutes)</label>
-  <input id="dur" type="text" name="duration" value="<%= @workout.duration"><br> <br>
+  <input id="dur" type="text" name="duration" value="<%= @workout.duration %>"><br> <br>
 
   <label for="cmt">Comments </label>
-  <input id="cmt" type="textarea" name="comment" value="<%=@workout.comment"><br> <br>
+  <input id="cmt" type="textarea" name="comment" value="<%=@workout.comment %>"><br> <br>
 
   <input type="submit" name="" value="Edit Workout">
 </form>

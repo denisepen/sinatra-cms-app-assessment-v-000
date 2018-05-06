@@ -32,6 +32,10 @@ class ApplicationController < Sinatra::Base
     redirect '/login'
  end
 
+ get '/show' do
+   erb :"/users/show"
+ end
+
  get '/workouts/:id/edit' do
   #  binding.pry
  if logged_in?
@@ -47,6 +51,11 @@ class ApplicationController < Sinatra::Base
 else
  redirect '/login'
 end
+end
+
+get '/users/workouts' do
+  @user=User.find(session[:user_id])
+  erb :"/users/show"
 end
 
  get '/workouts/new' do
@@ -70,13 +79,10 @@ else
 end
 end
 
- get '/users/workouts' do
-   @user = User.find(session[:user_id])
-   erb :"/workouts/show"
- end
 
  patch '/workouts/:id' do
-  # binding.pry
+ #route to edit a single workout
+  raise params.inspect
   if logged_in?
    @workout=Workout.find(params[:id])
      if !params[:type].empty?
@@ -129,6 +135,7 @@ end
 end
 
 post '/workouts/show' do
+  #new workout created & displayed with this route
   #  raise params.inspect
   @user = User.find(session[:user_id])
   @workout = Workout.new(type: params[:type], duration: params[:duration], comment: params[:comment])
