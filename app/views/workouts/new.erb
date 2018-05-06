@@ -2,13 +2,13 @@
 
 <form class="" action="/workouts/show" method="post">
   <label for="wkt">Choose The Workout Type From The Dropdown Menu: </label>
-  <select name="workout">
-    <option value="Run">Run</option>
-    <option value="Bike">Bike</option>
-    <option value="Walk">Walk</option>
-    <option value="Yoga">Yoga</option>
-    <option value="Cardio">Cardio</option>
-    <option value="Weight Training">Weight Training</option> <br>
+
+    <select id="wkt" name="workout">
+      <% @workouts = ["Bike", "Cardio", "Run","Walk", "Weight Training", "Yoga"] %>
+      <% @workouts.each do |workout| %>
+      <option value="<%= workout %>"><%= workout %></option>
+    <% end %>
+
 </select>
 
   <label for="wkt">Or create a new type of workout: </label>
@@ -22,3 +22,6 @@
 
   <input type="submit" name="" value="Create New Workout">
 </form>
+
+<a href="/landing">Home Page</a>
+<a href="/logout">Log Out</a>

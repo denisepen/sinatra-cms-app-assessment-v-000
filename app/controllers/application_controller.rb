@@ -55,13 +55,16 @@ end
 end
 
 get '/users/workouts' do
+  # binding.pry
   @user=User.find(session[:user_id])
   erb :"/users/show"
 end
 
  get '/workouts/new' do
+
    erb :'/workouts/new'
  end
+
   get '/workouts/workouts' do
     # @user = User.find(session[:user_id])
     erb :"/workouts/index"
@@ -149,11 +152,15 @@ post '/workouts/show' do
   #new workout created & displayed with this route
   #  raise params.inspect
   @user = User.find(session[:user_id])
+  if params[:workout].empty?
+    redirect "/workouts/new"
+  else
   @workout = Workout.new(workout: params[:workout], duration: params[:duration], comment: params[:comment], mileage: params[:mileage])
     @workout.save
 
     @user.workouts << @workout
   erb :"/workouts/show"
+  end
 end
 
 delete '/workouts/:id/delete' do
