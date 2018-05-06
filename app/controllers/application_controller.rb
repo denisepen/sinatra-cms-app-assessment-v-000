@@ -23,7 +23,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/landing' do
-    "Landing Page"
+    @user = User.find(session[:user_id])
+    erb :"/users/landing"
   end
 
   get '/logout' do
