@@ -22,11 +22,28 @@ class ApplicationController < Sinatra::Base
     erb :'/users/login'
   end
 
-post '/signup' do
-  "Hello"
-end
+  get '/landing' do
+    "Landing Page"
+  end
 
-testing testing
+  post '/signup' do
+
+      if params[:username].empty? || params[:email].empty? || params[:password].empty?
+           redirect "/signup"
+       else
+         @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
+         @user.save
+         if  logged_in? || @user.save
+         session[:user_id] = @user.id
+         session[:email] = @user.email
+         session[:username] = @user.username
+
+         redirect '/landing'
+       end
+      end
+  end
+
+
 
 
   helpers do
