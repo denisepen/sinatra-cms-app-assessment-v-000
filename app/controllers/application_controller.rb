@@ -67,6 +67,7 @@ end
 
 post '/workouts/show' do
   raise params.inspect
+  @workout = Workout.new(type: params[:type], duration: params[:duration], comment: params[:comment])
   erb :"/workouts/show"
 end
 

@@ -1,16 +1,15 @@
 <h1>Create A New Workout</h1>
 
 <form class="" action="/workouts/show" method="post">
-  <label for="sel">Choose The Workout Type From The Dropdown Menu: </label>
-<select id ="sel" class="type" name="">
-  <option value="">Run</option>
-  <option value="">Bike</option>
-  <option value="">Walk</option>
-  <option value="">Yoga</option>
-  <option value="">Weight Training</option> <br>
-
-
-</select>
+  <label for="wkt">Choose The Workout Type From The Dropdown Menu: </label>
+<input list="wkt" name="type">
+  <datalist id="wkt">
+    <option value="Run">Run</option>
+    <option value="Bike">Bike</option>
+    <option value="Walk">Walk</option>
+    <option value="Yoga">Yoga</option>
+    <option value="Weight Training">Weight Training</option> <br>
+  </datalist>
 
   <label for="wkt">Or create a new type of workout: </label>
   <input id="wkt" type="text" name="type" value=""><br> <br>
