@@ -4,7 +4,7 @@
 <input type="hidden" id="hidden" name="_method" value="patch">
 
   <label for="wkt">Workout Type: </label>
-<input type="text" name="workout" value="<%= @workout.workout %>">
+<input type="text" name="workout" id="workout" value="<%= @workout.workout %>">
 
   <label for="dur">Workout Duration (minutes)</label>
   <input id="dur" type="text" name="duration" value="<%= @workout.duration %>"><br> <br>
@@ -12,7 +12,7 @@
   <label for="cmt">Comments </label>
   <input id="cmt" type="textarea" name="comment" value="<%=@workout.comment %>"><br> <br>
 
-  <input type="submit" name="" value="Edit Workout">
+  <input type="submit" name="" value="Update Workout">
 </form>
 
 <a href="/landing">Home Page</a>

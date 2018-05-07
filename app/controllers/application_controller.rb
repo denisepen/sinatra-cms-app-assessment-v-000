@@ -61,7 +61,7 @@ get '/users/workouts' do
 end
 
  get '/workouts/new' do
-
+   @workouts = Workout.all
    erb :'/workouts/new'
  end
 
@@ -150,7 +150,7 @@ end
 
 post '/workouts/show' do
   #new workout created & displayed with this route
-  #  raise params.inspect
+   raise params.inspect
   @user = User.find(session[:user_id])
   if params[:workout].empty?
     redirect "/workouts/new"

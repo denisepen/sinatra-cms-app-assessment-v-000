@@ -4,9 +4,9 @@
   <label for="wkt">Choose The Workout Type From The Dropdown Menu: </label>
 
     <select id="wkt" name="workout">
-      <% @workouts = ["Bike", "Cardio", "Run","Walk", "Weight Training", "Yoga"] %>
+
       <% @workouts.each do |workout| %>
-      <option value="<%= workout %>"><%= workout %></option>
+      <option value="<%= workout.id %>"><%= workout.workout %></option>
     <% end %>
 
 </select>

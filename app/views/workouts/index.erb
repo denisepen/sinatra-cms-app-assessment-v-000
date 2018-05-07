@@ -1,8 +1,9 @@
 <h1> All Workouts</h1>
 
 <% Workout.all.each do |wkt| %>
+<% if wkt.user %>
 <a href="/workouts/<%= wkt.id %>"><%= wkt.user.username %> <%= wkt.workout %> <%= wkt.duration %> minutes </a> <br><br>
-
+  <% end %>
   <% end %>
 
   <a href="/landing">Home Page</a>
