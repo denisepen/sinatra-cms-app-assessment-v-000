@@ -150,12 +150,16 @@ end
 
 post '/workouts/show' do
   #new workout created & displayed with this route
-   raise params.inspect
+    # binding.pry
   @user = User.find(session[:user_id])
-  if params[:workout].empty?
+  if params[:workout].empty? && params[:new_workout].empty?
     redirect "/workouts/new"
   else
-  @workout = Workout.new(workout: params[:workout], duration: params[:duration], comment: params[:comment], mileage: params[:mileage])
+    if params[:new_workout].empty?
+    @workout = Workout.new(workout: params[:workout].capitalize, duration: params[:duration], comment: params[:comment], mileage: params[:mileage])
+    else
+  @workout = Workout.new(workout: params[:new_workout].chomp.capitalize, duration: params[:duration], comment: params[:comment], mileage: params[:mileage])
+  end
     @workout.save
 
     @user.workouts << @workout
