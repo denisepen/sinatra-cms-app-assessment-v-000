@@ -7,11 +7,7 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "secret"
-    #  require 'rack-flash'
-    # require 'sinatra/redirect_with_flash'
-    # use Rack::Flash, :sweep => true
   end
-
 
   get '/' do
     erb :homepage
@@ -59,14 +55,15 @@ end
 
 get '/users/workouts' do
   # binding.pry
+  #shows a list of all the users workouts
   @user=User.find(session[:user_id])
 
- #  if @user.workouts.find_by(workout: "Bike")
- #    @bike_wkts = @user.workouts.find_each(workout: "Bike") do |wkt|
- #      wkt.workout
- #    end
- #  end
- # binding.pry
+  if @user.workouts.find_by(workout: "Bike")
+    @bike_wkts = @user.workouts.find_each(workout: "Bike") do |wkt|
+      wkt.workout
+    end
+  end
+ binding.pry
   erb :"/users/show"
 end
 
@@ -76,7 +73,7 @@ end
  end
 
   get '/workouts/workouts' do
-    # @user = User.find(session[:user_id])
+    #  @user = User.find(session[:user_id])
     erb :"/workouts/index"
   end
 
@@ -87,7 +84,7 @@ end
  end
 
  get '/workouts/:id' do
-
+# shows users single workout
    @workout = Workout.find(params[:id])
 
   if session[:user_id] == @workout.user_id
@@ -116,9 +113,6 @@ end
       @user = User.find(session[:user_id])
       @user.id = @workout.user_id
       @workout.save
-      # if @workout.save 
-      #   flash[:success] = "Successfully updated workout."
-      # end
       redirect "/workouts/#{@workout.id}"
     else
       redirect "/workouts/#{@workout.id}/edit"
@@ -174,6 +168,10 @@ post '/workouts/show' do
   @workout = Workout.new(workout: params[:new_workout].chomp.capitalize, duration: params[:duration], comment: params[:comment], mileage: params[:mileage])
   end
     @workout.save
+
+    # if !params[:workout] == ("Bike" || "Run" || "Walk" || "Swim")
+    #   @mileage = params[:mileage]
+    # end
 
     @user.workouts << @workout
   erb :"/workouts/show"

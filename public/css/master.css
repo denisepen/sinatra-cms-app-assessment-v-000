@@ -1,11 +1,20 @@
 h1 {
-  color: yellow;
+  color: black;
 }
 
 h4 {
-  color: red;
+  color: black;
 }
 
 body {
-  background: rgb(102, 153, 153);
+  background: rgb(211, 211, 211);
+  font-family: Sans-serif;
+  /*backround: url(https://media.self.com/photos/5867a314bf5e49f716efe864/4:3/w_768,c_limit/workout-package_1.png);*/
+}
+
+div {
+  text-align: center;
+  /*margin-left: auto;
+    margin-right: auto;*/
+    border: 3px solid gray;
 }
