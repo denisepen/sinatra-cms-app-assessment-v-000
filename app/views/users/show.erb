@@ -3,8 +3,18 @@
     <h3>Total Workout Time: <%= @user.workouts.sum("duration") %> minutes (<%= (@user.workouts.sum("duration").to_f.round(3))/60 %> Hours)</h3>
     <h3>Total Mileage: <%= @user.workouts.sum("mileage") %> miles </h3>
 
+
     <% if @bike_wkts %>
-    <h4>Total Bike Time: <%= @bike_wkts.sum("duration") %>  </h4>
+    <h4>Total Bike Time: <%= @bike_wkts.sum("duration") %> Total Bike Mileage: <%= @bike_wkts.sum("mileage") %> </h4>
+    <% end %>
+    <% if @run_wkts %>
+    <h4>Total Run Time: <%= @run_wkts.sum("duration") %> Total Run Mileage: <%= @run_wkts.sum("mileage") %> </h4>
+    <% end %>
+    <% if @walk_wkts %>
+    <h4>Total Walk Time: <%= @walk_wkts.sum("duration") %> Total Walk Mileage: <%= @walk_wkts.sum("mileage") %> </h4>
+    <% end %>
+    <% if @swim_wkts %>
+    <h4>Total Swim Time: <%= @swim_wkts.sum("duration") %> Total Swim Mileage: <%= @swim_wkts.sum("mileage") %> </h4>
     <% end %>
 
     <% @user.workouts.all.each do |wkt| %>

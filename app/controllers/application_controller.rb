@@ -59,11 +59,18 @@ get '/users/workouts' do
   @user=User.find(session[:user_id])
 
   if @user.workouts.find_by(workout: "Bike")
-    @bike_wkts = @user.workouts.find_each(workout: "Bike") do |wkt|
-      wkt.workout
-    end
+    @bike_wkts = @user.workouts.where(workout: "Bike") 
   end
- binding.pry
+  if @user.workouts.where(workout: "Run")
+    @run_wkts = @user.workouts.where(workout: "Run") 
+  end
+  if @user.workouts.where(workout: "Swim")
+    @swim_wkts = @user.workouts.where(workout: "Swim") 
+  end
+  if @user.workouts.where(workout: "Walk")
+    @walk_wkts = @user.workouts.where(workout: "Walk") 
+  end
+ # binding.pry
   erb :"/users/show"
 end
 
