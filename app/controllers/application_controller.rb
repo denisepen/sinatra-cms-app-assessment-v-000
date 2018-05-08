@@ -57,6 +57,13 @@ end
 get '/users/workouts' do
   # binding.pry
   @user=User.find(session[:user_id])
+
+ #  if @user.workouts.find_by(workout: "Bike")
+ #    @bike_wkts = @user.workouts.find_each(workout: "Bike") do |wkt|
+ #      wkt.workout
+ #    end
+ #  end
+ # binding.pry
   erb :"/users/show"
 end
 

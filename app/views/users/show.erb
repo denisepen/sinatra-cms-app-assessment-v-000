@@ -1,9 +1,18 @@
 <h1><%= @user.username.capitalize %>'s  Workouts</h1>
+<h3>Total Workout Time: <%= @user.workouts.sum("duration") %> seconds (<%= (@user.workouts.sum("duration"))/60 %> Hours) </h3>
+
+
+<% if @bike_wkts %>
+<h4>Total Bike Time: <%= @bike_wkts.sum("duration") %>  </h4>
+<% end %>
 
 <% @user.workouts.all.each do |wkt| %>
 <a href="/workouts/<%= wkt.id %>">Workout: <%= wkt.workout %>   Duration: <%= wkt.duration %> minutes</a> <br>
 
   <% end %> <br>
+
+
+
 
   <a href="/landing">Home Page</a>
   <a href="/logout">Log Out</a>
