@@ -7,6 +7,9 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "secret"
+    #  require 'rack-flash'
+    # require 'sinatra/redirect_with_flash'
+    # use Rack::Flash, :sweep => true
   end
 
 
@@ -113,6 +116,9 @@ end
       @user = User.find(session[:user_id])
       @user.id = @workout.user_id
       @workout.save
+      # if @workout.save 
+      #   flash[:success] = "Successfully updated workout."
+      # end
       redirect "/workouts/#{@workout.id}"
     else
       redirect "/workouts/#{@workout.id}/edit"
@@ -128,7 +134,7 @@ end
       if params[:username].empty? || params[:email].empty? || params[:password].empty?
            redirect "/signup"
        else
-         @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
+         @user = User.create(:username => params[:username].downcase, :email => params[:email].downcase, :password => params[:password])
          @user.save
          if  logged_in? || @user.save
          session[:user_id] = @user.id

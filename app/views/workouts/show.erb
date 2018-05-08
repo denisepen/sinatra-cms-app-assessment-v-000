@@ -9,10 +9,14 @@
   <input type="submit" name="" value="Edit Workout">
 </form>
 
+<br>
+
 <form class="" action="/workouts/<%= @workout.id %>/delete" method="post">
   <input type="hidden" id= "hidden" name="_method" value="delete">
   <input type="submit" name="" value="Delete Workout">
 </form>
+
+<br>
 
 <a href="/landing">Home Page</a>
 <a href="/logout">Log Out</a>
