@@ -20,7 +20,6 @@ gem 'bcrypt'
 gem "tux"
 gem "flash"
 gem 'sinatra-flash'
-gem 'tux'
 gem 'rack-flash3'
 gem 'sinatra-redirect-with-flash'
 gem 'jquery-ui-rails'
