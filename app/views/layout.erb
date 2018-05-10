@@ -7,6 +7,16 @@
   </head>
   <body>
     <div class="">
+
+
+      <% if flash[:signup] %>
+      <div class="signup"><%= flash[:signup] %></div>
+      <% end %>
+
+      <% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+      <% end %>
+
       <%= yield %>
     </div>
 

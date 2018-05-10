@@ -2,8 +2,12 @@ class User < ActiveRecord::Base
 has_secure_password
 has_many :workouts
 # validates_presence_of :username, :email, :password
-validates :username, presence: true
-validates :password, presence: true
+# validates :username, presence: true
+validates_presence_of :username
+validates_presence_of :email
+validates_presence_of :password
+
+# validates :password, presence: true
 # validates_uniqueness_of :password
 
 def slug

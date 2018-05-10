@@ -1,7 +1,14 @@
 require './config/environment'
+require 'rack-flash'
+ require 'sinatra/redirect_with_flash'
+
+ register Sinatra::ActiveRecordExtension
+
 
 class ApplicationController < Sinatra::Base
 
+  enable :sessions
+  use Rack::Flash, :sweep => true
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
@@ -58,19 +65,19 @@ get '/users/workouts' do
   #shows a list of all the users workouts
   @user=User.find(session[:user_id])
 
-  if @user.workouts.find_by(workout: "Bike")
-    @bike_wkts = @user.workouts.where(workout: "Bike") 
+  if !@user.workouts.where(workout: "Bike").empty?
+    @bike_wkts = @user.workouts.where(workout: "Bike")
   end
-  if @user.workouts.where(workout: "Run")
-    @run_wkts = @user.workouts.where(workout: "Run") 
+  if !@user.workouts.where(workout: "Run").empty?
+    @run_wkts = @user.workouts.where(workout: "Run")
   end
-  if @user.workouts.where(workout: "Swim")
-    @swim_wkts = @user.workouts.where(workout: "Swim") 
+  if !@user.workouts.where(workout: "Swim").empty?
+    @swim_wkts = @user.workouts.where(workout: "Swim")
   end
-  if @user.workouts.where(workout: "Walk")
-    @walk_wkts = @user.workouts.where(workout: "Walk") 
+  if !@user.workouts.where(workout: "Walk").empty?
+    @walk_wkts = @user.workouts.where(workout: "Walk")
   end
- # binding.pry
+  # binding.pry
   erb :"/users/show"
 end
 
@@ -133,6 +140,16 @@ end
   post '/signup' do
 
       if params[:username].empty? || params[:email].empty? || params[:password].empty?
+        # trying to get a list of error messages
+        #for loin and signup errors/mistakes
+
+        # if @user.errors.any?
+        #   # binding.pry
+        #   @message = @user.errors.full_messages.each do |msg|
+        #     msg
+        #   end
+        # end
+
            redirect "/signup"
        else
          @user = User.create(:username => params[:username].downcase, :email => params[:email].downcase, :password => params[:password])
@@ -141,7 +158,7 @@ end
          session[:user_id] = @user.id
          session[:email] = @user.email
          session[:username] = @user.username
-
+         flash[:signup] = "Signed Up!"
          redirect '/landing'
        end
       end
@@ -156,8 +173,10 @@ end
           session[:user_id] = user.id
           session[:email] = user.email
           session[:username] = user.username
+        flash[:notice] = "Logged In!"
         redirect "/landing"
     else
+
         redirect "/login"
     end
 end
@@ -175,11 +194,6 @@ post '/workouts/show' do
   @workout = Workout.new(workout: params[:new_workout].chomp.capitalize, duration: params[:duration], comment: params[:comment], mileage: params[:mileage])
   end
     @workout.save
-
-    # if !params[:workout] == ("Bike" || "Run" || "Walk" || "Swim")
-    #   @mileage = params[:mileage]
-    # end
-
     @user.workouts << @workout
   erb :"/workouts/show"
   end
@@ -188,6 +202,7 @@ end
 delete '/workouts/:id/delete' do
 
     @workout =Workout.find_by_id(params[:id])
+    # binding.pry
    if  @workout.user_id == session[:user_id] && logged_in?
      @workout.delete
     redirect '/users/workouts'

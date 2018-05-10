@@ -1,9 +1,20 @@
+<<<<<<< HEAD
+=======
+<h1><%= @user.username.capitalize %>'s  Workouts</h1>
+<h3>Total Workout Time: <%= @user.workouts.sum("duration") %> seconds (<%= (@user.workouts.sum("duration"))/60 %> Hours) </h3>
+
+
+<% if @bike_wkts %>
+<h4>Total Bike Time: <%= @bike_wkts.sum("duration") %>  </h4>
+<% end %>
+>>>>>>> 1fd0ec075b7892eb8170300bf20f1fe30d80eb61
 
     <h1><%= @user.username.capitalize %>'s  Workouts</h1>
     <h3>Total Workout Time: <%= @user.workouts.sum("duration") %> minutes (<%= (@user.workouts.sum("duration").to_f.round(3))/60 %> Hours)</h3>
     <h3>Total Mileage: <%= @user.workouts.sum("mileage") %> miles </h3>
 
 
+<<<<<<< HEAD
     <% if @bike_wkts %>
     <h4>Total Bike Time: <%= @bike_wkts.sum("duration") %> Total Bike Mileage: <%= @bike_wkts.sum("mileage") %> </h4>
     <% end %>
@@ -25,3 +36,10 @@
       <span></span>
 
       <a href="/landing">Home Page</a> <a href="/logout">Log Out</a>
+=======
+
+
+
+  <a href="/landing">Home Page</a>
+  <a href="/logout">Log Out</a>
+>>>>>>> 1fd0ec075b7892eb8170300bf20f1fe30d80eb61
