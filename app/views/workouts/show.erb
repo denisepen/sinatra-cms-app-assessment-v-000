@@ -9,8 +9,9 @@
         <% if @workout.duration %>
 <h4>Duration:  <%= @workout.duration %> minutes</h4> <br>
   <% end %>
+    <% if @workout.comment %>
 <h4>Comments:  <%= @workout.comment %>  </h2>
-
+  <% end %>
 
 <form class="" action="/workouts/<%= @workout.id %>/edit" method="get">
   <input type="submit" name="" value="Edit Workout">
