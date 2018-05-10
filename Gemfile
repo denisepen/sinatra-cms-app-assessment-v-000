@@ -23,6 +23,7 @@ gem 'sinatra-flash'
 gem 'tux'
 gem 'rack-flash3'
 gem 'sinatra-redirect-with-flash'
+gem 'jquery-ui-rails'
 
 group :test do
   gem 'rspec'
