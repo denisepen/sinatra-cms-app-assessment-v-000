@@ -2,7 +2,7 @@
 
 <% Workout.all.each do |wkt| %>
 <% if wkt.user %>
-<a href="/workouts/<%= wkt.id %>"><%= wkt.user.username %> <%= wkt.workout %><% if wkt.date %> Date: <%= wkt.date.to_s %> <%end %> <%= wkt.duration %> minutes </a> <br><br>
+<a href="/workouts/<%= wkt.id %>"><%= wkt.user.username %> <%= wkt.workout %><% if wkt.date %> Date: <%= wkt.date.to_strftime(%b %d %Y) %> <%end %> <%= wkt.duration %> minutes </a> <br><br>
   <% end %>
   <% end %>
 
