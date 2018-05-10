@@ -121,7 +121,7 @@ end
   if logged_in?
    @workout=Workout.find(params[:id])
      if !params[:workout].empty?
-       @workout.update(workout: params[:workout], duration: params[:duration], comment: params[:comment], mileage: params[:mileage])
+       @workout.update(workout: params[:workout], date: params[:date], duration: params[:duration], comment: params[:comment], mileage: params[:mileage])
 
       session[:workout] = params[:workout]
       @user = User.find(session[:user_id])
@@ -141,7 +141,7 @@ end
 
       if params[:username].empty? || params[:email].empty? || params[:password].empty?
         # trying to get a list of error messages
-        #for loin and signup errors/mistakes
+        #for login and signup errors/mistakes
 
         # if @user.errors.any?
         #   # binding.pry
@@ -167,12 +167,12 @@ end
 
 
   post "/login" do
-     user = User.find_by(username: params[:username])
-
-    if user && user.authenticate(params[:password])
-          session[:user_id] = user.id
-          session[:email] = user.email
-          session[:username] = user.username
+     @user = User.find_by(username: params[:username])
+     binding.pry
+    if @user && @user.authenticate(params[:password])
+          session[:user_id] = @user.id
+          session[:email] = @user.email
+          session[:username] = @user.username
         flash[:notice] = "Logged In!"
         redirect "/landing"
     else
@@ -189,9 +189,9 @@ post '/workouts/show' do
     redirect "/workouts/new"
   else
     if params[:new_workout].empty?
-    @workout = Workout.new(workout: params[:workout].capitalize, duration: params[:duration], comment: params[:comment], mileage: params[:mileage])
+    @workout = Workout.new(date: params[:date], workout: params[:workout].capitalize, duration: params[:duration], comment: params[:comment], mileage: params[:mileage])
     else
-  @workout = Workout.new(workout: params[:new_workout].chomp.capitalize, duration: params[:duration], comment: params[:comment], mileage: params[:mileage])
+  @workout = Workout.new(date: params[:date], workout: params[:new_workout].chomp.capitalize, duration: params[:duration], comment: params[:comment], mileage: params[:mileage])
   end
     @workout.save
     @user.workouts << @workout
