@@ -2,7 +2,7 @@
 
 <h1>Workout Type:  <%= @workout.workout %>    </h4> <br>
 
-  <h4>Date: <%= @workout.date.to_s %></h4>
+  <h4>Date: <%= @workout.date.strftime("%b %d, %Y") %></h4>
       <% if @workout.mileage %>
   <h4>Mileage: <%= @workout.mileage %></h4>
       <% end %>
