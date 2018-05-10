@@ -22,7 +22,7 @@
     <% end %>
 
     <% @user.workouts.all.each do |wkt| %>
-    <a href="/workouts/<%= wkt.id %>">Workout: <%= wkt.workout %>   Duration: <%= wkt.duration %> minutes <% if wkt.date %>Date: <%= wkt.date %> <% end %>
+    <a href="/workouts/<%= wkt.id %>">Workout: <%= wkt.workout %>   Duration: <%= wkt.duration %> minutes <% if wkt.date %>Date: <%= wkt.date.strftime("%b %d, %Y") %> <% end %>
      <% if wkt.mileage %>Mileage: <%= wkt.mileage %> miles <% end %> </a> <br>
 
       <% end %> <br>
