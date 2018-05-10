@@ -6,8 +6,9 @@
       <% if @workout.mileage %>
   <h4>Mileage: <%= @workout.mileage %></h4>
       <% end %>
+        <% if @workout.duration %>
 <h4>Duration:  <%= @workout.duration %> minutes</h4> <br>
-
+  <% end %>
 <h4>Comments:  <%= @workout.comment %>  </h2>
 
 
