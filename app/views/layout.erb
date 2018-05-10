@@ -13,6 +13,14 @@
       <div class="signup"><%= flash[:signup] %></div>
       <% end %>
 
+      <% if flash[:s_error] %>
+      <div class="s_error"><%= flash[:s_error] %></div>
+      <% end %>
+
+      <% if flash[:l_error] %>
+      <div class="l_error"><%= flash[:l_error] %></div>
+      <% end %>
+
       <% if flash[:notice] %>
       <div class="notice"><%= flash[:notice] %></div>
       <% end %>

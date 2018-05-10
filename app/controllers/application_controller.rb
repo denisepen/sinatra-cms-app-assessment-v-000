@@ -149,10 +149,10 @@ end
         #     msg
         #   end
         # end
-
+        flash[:s_error] = "Username, Email & Password required "
            redirect "/signup"
        else
-         @user = User.create(:username => params[:username].downcase, :email => params[:email].downcase, :password => params[:password])
+         @user = User.create(:username => params[:username], :email => params[:email].downcase, :password => params[:password])
          @user.save
          if  logged_in? || @user.save
          session[:user_id] = @user.id
@@ -168,7 +168,7 @@ end
 
   post "/login" do
      @user = User.find_by(username: params[:username])
-     binding.pry
+    #  binding.pry
     if @user && @user.authenticate(params[:password])
           session[:user_id] = @user.id
           session[:email] = @user.email
@@ -176,7 +176,7 @@ end
         flash[:notice] = "Logged In!"
         redirect "/landing"
     else
-
+      flash[:l_error] = "Username & Password required "
         redirect "/login"
     end
 end

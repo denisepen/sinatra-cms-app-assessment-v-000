@@ -11,8 +11,8 @@ body {
   font-family: Sans-serif;
   /*backround: url(https://media.self.com/photos/5867a314bf5e49f716efe864/4:3/w_768,c_limit/workout-package_1.png);*/
 }
-.notice { color: green; }
-.signup { color: red; }
+.notice, .signup { color: blue; }
+.l_error, .s_error { color: red; }
 
 div {
   text-align: center;
